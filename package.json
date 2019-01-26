@@ -1,0 +1,42 @@
+{
+  "name": "react_seed",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://githubmaxwell.github.io/react_seed",
+  "scripts": {
+    "start": "webpack-dev-server --open --port 3333 --mode development",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production --progress",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "ajv": "^6.5.5",
+    "css-loader": "^1.0.1",
+    "dotenv-webpack": "^1.5.7",
+    "gh-pages": "^2.0.1",
+    "node-sass": "^4.10.0",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "react-router-dom": "^4.3.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "@babel/core": "^7.1.5",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^4.0.0-beta.2",
+    "resolve-url-loader": "^3.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}

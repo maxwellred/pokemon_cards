@@ -1,0 +1,112 @@
+// Color Palette (placholder change)
+$header-color: #f9423a;
+$primary-color: #f9423a;
+$secondary-color: black;
+$background-color: #f6f3ea;
+
+// Dynamically Set Color (placholder change)
+@function set-text-color($color) {
+  @if (lightness($color) > 40) {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}
+// ============ End of Color Palette
+
+// Font Palette (placholder change)
+$heading-font: Arial, Helvetica, sans-serif;
+$sub-heading-font: Helvetica;
+$body-font: Times;
+// ============ End of Font Palette
+
+// Layout Palette
+$layout-grid-container: grid;
+$layout-flex-container: flex;
+// ============ End of Layout Palette
+
+// Transition (placholder change)
+@mixin easeOut {
+  transition: all 170ms ease-out;
+}
+// ============ End of Transitions
+
+// Media Queries (placholder change)
+@mixin mediaSm {
+  @media screen and (max-width: 500px) {
+    @content;
+  }
+}
+@mixin mediaMd {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+// do you need a range?
+// cant just do (max-width:1170px)?
+@mixin mediaLg {
+  // @media screen and (max-width: 1170px) {
+  @media screen and (min-width: 769px) and (max-width: 1170px) {
+    @content;
+  }
+}
+
+//do min-width here because from that point to any larger width, apply *these styles
+@mixin mediaXl {
+  @media screen and (min-width: 1171px) {
+    @content;
+  }
+}
+
+/********* Media Query Usage **********/
+/* bring in mixin with @include <name> -> content inside that @include <name> {...} maps to the config file @content
+
+@include mediaSm {
+  main#home h1 {
+    margin-top: 10vh;
+  }
+  .projects {
+    grid-template-columns: 1fr;
+  }
+}
+
+*/
+// ============ End of Media Queries
+
+/* FLEX BOX / prefixes
+
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;  
+  -moz-box-ordinal-group: $val;     
+  -ms-flex-order: $val;     
+  -webkit-order: $val;  
+  order: $val;
+}
+
+.wrapper {
+  @include flexbox();
+}
+
+.item {
+  @include flex(1 200px);
+  @include order(2);
+}
+
+
+*/

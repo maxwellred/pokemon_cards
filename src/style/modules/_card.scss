@@ -1,0 +1,56 @@
+/* DISPLAY */
+.container,
+.wrapper {
+  display: flex;
+}
+.wrapper {
+  /* width: 100 */
+  justify-content: center;
+  align-items: center;
+}
+
+.card-container,
+.move-container,
+.poke-move-text {
+  flex-direction: column;
+}
+.card-header {
+  align-items: flex-end;
+}
+.card-wrapper {
+  // max-width: 300px;
+  //   make background dynamic
+  //   background-image: url('./assets/backgrounds/fire.png');
+  background-size: cover;
+}
+
+/* STYLE */
+.card-header p {
+  margin-left: auto;
+}
+img {
+  width: 200px;
+}
+.card-wrapper {
+  border: 15px solid #fdd424;
+  border-radius: 20px;
+}
+.card-container {
+  padding: 10px;
+}
+.pokemon-details {
+  background-color: #fdd424;
+}
+.poke-move-text p,
+.pokemon-details p {
+  font-size: 0.6em;
+}
+
+/* SPACING */
+img {
+  margin-bottom: 0.5em;
+}
+.card-header,
+.pokemon-details {
+  margin-bottom: 0.5em;
+}

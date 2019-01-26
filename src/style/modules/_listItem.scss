@@ -1,0 +1,12 @@
+// style ul, li
+
+.pokemon-ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: space-between;
+}
+.pokemon-li {
+  height: 400px;
+  // width: 200px;
+}
