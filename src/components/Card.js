@@ -18,20 +18,13 @@ export default class App extends Component {
     };
   }
   componentWillMount() {
-    // have to getItem by pokemon number passed by name from props
-    // change this to check if INSIDE the localstorage parent object pokemonDetails the key of this.props.name exists then get that
     let pokeName = this.props.name;
-    console.log('POKE NAME: ', pokeName);
-    console.log(JSON.parse(localStorage.getItem('pokemonCardDetails')).pokeName);
-    // undefined on reload so its not saving it
-    // console.log('POKE NAME in local: ', localStorage.getItem('pokemonCardDetails').pokeName);
-
-    // TODO: handle when its the first time of calling and there isnt a pokemonCardDetails list in localstorage at all
-
-    // see if the card exists (which also checks if the list exists too)
-    if (JSON.parse(localStorage.getItem('pokemonCardDetails')).pokeName) {
+    if (
+      localStorage.getItem('pokemonCardDetails') &&
+      JSON.parse(localStorage.getItem('pokemonCardDetails'))[pokeName]
+    ) {
       console.log('getting POKEMON CARD from localstorage...');
-      let parsedData = JSON.parse(localStorage.getItem('pokemonCardDetails')).pokeName;
+      let parsedData = JSON.parse(localStorage.getItem('pokemonCardDetails'))[pokeName];
       // take previous state and over write it
       // this is wrong? need to use the function version of setState to overwrite it?
       this.setState({ ...parsedData });
@@ -65,26 +58,18 @@ export default class App extends Component {
               webImgPath: assets(`./${bgType}.png`, true)
             },
             () => {
-              //   console.log('setting POKEMON CARD in local storage...');
-              // after state has been set, create a new obj to set into local storage so we can grab that the next time around and not have to make an API call
               let newPokeCard = {
                 [this.props.name]: this.state
               };
-              //   console.log('New Poke Card: ', newPokeCard);
+
               // IF pokemonCardDetails exists in local storage but the card doesnt, add it
               if (localStorage.getItem('pokemonCardDetails')) {
                 console.log('setting POKEMON CARD in local storage...');
-
                 let parsedLocalDetails = JSON.parse(localStorage.getItem('pokemonCardDetails'));
                 parsedLocalDetails = { ...parsedLocalDetails, ...newPokeCard };
                 localStorage.setItem('pokemonCardDetails', JSON.stringify(parsedLocalDetails));
 
-                console.log(
-                  'POKE CARD set in local: ',
-                  JSON.parse(localStorage.getItem('pokemonCardDetails')).pokeName
-                );
-
-                // else if the pokemonCardDetails key doesnt exist in localStorage then make it and add the card to it
+                // ELSE IF the pokemonCardDetails key doesnt exist in localStorage then make it and then add the card to it
               } else {
                 console.log('setting LIST and POKEMON CARD in local storage...');
                 // dont need spread operator?
@@ -120,12 +105,15 @@ export default class App extends Component {
               </div>
               <div className="container move-container">
                 <div className="container poke-move">
-                  <div className="container poke-move-text">
-                    {/* make this a ul with li items */}
-                    <h3>Move Title</h3>
-                    <p>{/* {this.props.} */}</p>
-                  </div>
-                  <p>100</p>
+                  <ul className="container poke-move-list">
+                    {this.state.moves.map(ele => {
+                      return (
+                        <li>
+                          <p>{ele.move.name}</p>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
               </div>
             </article>
@@ -135,3 +123,8 @@ export default class App extends Component {
     );
   }
 }
+
+// {/* <div className="container poke-move-text">
+//  <h3>Move Title</h3>
+//  <p>{/* {this.props.} */}</p>
+// </div> */}

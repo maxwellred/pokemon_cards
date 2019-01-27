@@ -7,6 +7,8 @@ export default class List extends Component {
     this.state = {
       pokemonList: []
     };
+    this.nextPage = this.nextPage.bind(this);
+    this.previousPage = this.previousPage.bind(this);
   }
 
   // QUERY STRING to add next and previous page and how many search results per page functionality
@@ -20,7 +22,7 @@ export default class List extends Component {
 
   componentWillMount() {
     // TODO:
-    // update this so it adds to the list after visiting new pages so if the person goes back it will grab the data from localstorage not make the API calls
+    // update this so it adds to the pokemonList after visiting new pages so if the person goes back it will grab the data from localstorage not make the API calls
 
     if (localStorage.getItem('pokemonList')) {
       // check reducer or localstorage
@@ -30,6 +32,7 @@ export default class List extends Component {
         pokemonList: [...parsedData]
       });
     } else {
+      // change to its own function so that compoWillMount,nextPage, and prevPage and access it
       fetch('https://pokeapi.co/api/v2/pokemon')
         .then(response => {
           console.log('fetching LIST data...');
@@ -46,9 +49,21 @@ export default class List extends Component {
     }
   }
 
+  nextPage() {
+    console.log('NEXT PAGE');
+  }
+
+  previousPage() {
+    console.log('PREVIOUS PAGE');
+  }
+
   render() {
     return (
       <Fragment>
+        <div className="page-buttons">
+          <button onClick={this.nextPage}>Next</button>
+          <button onClick={this.previousPage}>Previous</button>
+        </div>
         <ul className="pokemon-ul">
           {this.state.pokemonList.map((ele, idx) => {
             return (

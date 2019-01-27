@@ -11,16 +11,13 @@
 
 .card-container,
 .move-container,
-.poke-move-text {
+.poke-move-list {
   flex-direction: column;
 }
 .card-header {
   align-items: flex-end;
 }
 .card-wrapper {
-  // max-width: 300px;
-  //   make background dynamic
-  //   background-image: url('./assets/backgrounds/fire.png');
   background-size: cover;
 }
 
@@ -41,9 +38,16 @@ img {
 .pokemon-details {
   background-color: #fdd424;
 }
-.poke-move-text p,
+
 .pokemon-details p {
   font-size: 0.6em;
+}
+
+.poke-move-list {
+  list-style-type: none;
+  height: 100px;
+  width: 100%;
+  overflow: scroll;
 }
 
 /* SPACING */
