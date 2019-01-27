@@ -22,19 +22,18 @@ export default class App extends Component {
     // change this to check if INSIDE the localstorage parent object pokemonDetails the key of this.props.name exists then get that
     let pokeName = this.props.name;
     console.log('POKE NAME: ', pokeName);
+    console.log(JSON.parse(localStorage.getItem('pokemonCardDetails')).pokeName);
     // undefined on reload so its not saving it
     // console.log('POKE NAME in local: ', localStorage.getItem('pokemonCardDetails').pokeName);
 
     // TODO: handle when its the first time of calling and there isnt a pokemonCardDetails list in localstorage at all
 
-    // see if the list exists and then see if the key were looking for exists in it
-    if (
-      localStorage.getItem('pokemonCardDetails') &&
-      localStorage.getItem('pokemonCardDetails').pokeName
-    ) {
-      // if (localStorage.getItem('pokemonCardDetails')) {
+    // see if the card exists (which also checks if the list exists too)
+    if (JSON.parse(localStorage.getItem('pokemonCardDetails')).pokeName) {
       console.log('getting POKEMON CARD from localstorage...');
-      let parsedData = JSON.parse(localStorage.getItem('pokemonCardDetails').pokeName);
+      let parsedData = JSON.parse(localStorage.getItem('pokemonCardDetails')).pokeName;
+      // take previous state and over write it
+      // this is wrong? need to use the function version of setState to overwrite it?
       this.setState({ ...parsedData });
     } else {
       fetch(`${this.props.details.url}`)
@@ -81,13 +80,13 @@ export default class App extends Component {
                 localStorage.setItem('pokemonCardDetails', JSON.stringify(parsedLocalDetails));
 
                 console.log(
-                  'POKE NAME in local: ',
-                  localStorage.getItem('pokemonCardDetails').pokeName
+                  'POKE CARD set in local: ',
+                  JSON.parse(localStorage.getItem('pokemonCardDetails')).pokeName
                 );
 
                 // else if the pokemonCardDetails key doesnt exist in localStorage then make it and add the card to it
               } else {
-                console.log('setting POKEMON CARD in local storage...');
+                console.log('setting LIST and POKEMON CARD in local storage...');
                 // dont need spread operator?
                 localStorage.setItem('pokemonCardDetails', JSON.stringify(newPokeCard));
               }
