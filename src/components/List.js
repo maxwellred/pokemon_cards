@@ -5,11 +5,11 @@ export default class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pokeArr: []
+      pokemonList: []
     };
   }
 
-  // QUERY STRING
+  // QUERY STRING to add next and previous page and how many search results per page functionality
   // https://pokeapi.co/api/v2/pokemon/?limit=20&offset=20
 
   // Remove local storage
@@ -19,24 +19,28 @@ export default class List extends Component {
   // setItem will also overwrite/update keys value given whats currently in there
 
   componentWillMount() {
-    if (localStorage.getItem('pokeArr')) {
+    // TODO:
+    // update this so it adds to the list after visiting new pages so if the person goes back it will grab the data from localstorage not make the API calls
+
+    if (localStorage.getItem('pokemonList')) {
       // check reducer or localstorage
-      console.log('getting from localstorage...');
-      let parsedData = JSON.parse(localStorage.getItem('pokeArr'));
+      console.log('getting LIST from localstorage...');
+      let parsedData = JSON.parse(localStorage.getItem('pokemonList'));
       this.setState({
-        pokeArr: [...parsedData]
+        pokemonList: [...parsedData]
       });
     } else {
       fetch('https://pokeapi.co/api/v2/pokemon')
         .then(response => {
-          console.log('fetching data...');
+          console.log('fetching LIST data...');
           return response.json();
         })
         .then(data => {
-          console.log('setting local storage...');
-          localStorage.setItem('pokeArr', JSON.stringify(data.results));
+          console.log('setting LIST in local storage...');
+          localStorage.setItem('pokemonList', JSON.stringify(data.results));
+          // update this to continually build the list per page view and grab from that
           this.setState({
-            pokeArr: [...data.results]
+            pokemonList: [...data.results]
           });
         });
     }
@@ -46,11 +50,11 @@ export default class List extends Component {
     return (
       <Fragment>
         <ul className="pokemon-ul">
-          {this.state.pokeArr.map((ele, idx) => {
+          {this.state.pokemonList.map((ele, idx) => {
             return (
               <li key={idx} className="pokemon-li">
                 {/* <a href={ele.url}>{ele.name}</a> */}
-                <Card details={ele} />
+                <Card name={ele.name} details={ele} />
               </li>
             );
           })}
